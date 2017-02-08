@@ -11,7 +11,6 @@ var path = require('path');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 var config = require('./../config');
-var mongoose = require('mongoose');
 var request = require('request');
 var compression = require('compression');
 var favicon = require('serve-favicon');
@@ -24,10 +23,7 @@ var colors = require('colors');
 var app = express();
 
 //DATABASE CONNECTION
-mongoose.connect(config.database);
-mongoose.connection.on('error', function() {
-    console.info('Error: Could not connect to MongoDB. Did you forget to run `mongod`?');
-});
+require('./database');
 
 //Setting port and middleware
 app.set('port', process.env.PORT || 3000);
@@ -38,13 +34,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(favicon(path.join(__dirname, '/../public', 'favicon.png')));
 app.use(express.static(path.join(__dirname, '/../public')));
 
-/*
- * API ROUTES
- */
-
-app.get('/api/hello', function(req, res, next) {
-    res.send("Hello from api!");
-});
+var api = require('./routes/api');
+app.use("/api", api);
 
 //Connecting Router to Node
 app.use(function(req, res) {
