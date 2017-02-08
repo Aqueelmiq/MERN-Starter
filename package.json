@@ -1,15 +1,15 @@
 {
-  "name": "newedenfaces",
-  "description": "Character voting app for EVE Online",
+  "name": "react-starter",
+  "description": "A starter application in react",
   "version": "1.0.0",
   "repository": {
     "type": "git",
     "url": ""
   },
-  "main": "server.js",
+  "main": "server/server.js",
   "scripts": {
-    "start": "node server.js",
-    "watch": "nodemon server.js",
+    "start": "node server/server.js",
+    "watch": "nodemon server/server.js",
     "postinstall": "bower install && gulp build"
   },
   "babel": {
