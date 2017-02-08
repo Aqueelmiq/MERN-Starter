@@ -34,6 +34,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(favicon(path.join(__dirname, '/../public', 'favicon.png')));
 app.use(express.static(path.join(__dirname, '/../public')));
 
+//Adding Routes
 var api = require('./routes/api');
 app.use("/api", api);
 
@@ -61,7 +62,7 @@ app.use(function(err, req, res, next) {
     res.send({ message: err.message });
 });
 
-
+//Adding socket.io features
 /**
  * Socket.io counter.
  */
@@ -83,3 +84,5 @@ io.sockets.on('connection', function(socket) {
 server.listen(app.get('port'), function() {
     console.log('Express server listening on port ' + app.get('port'));
 });
+
+
